@@ -1,3 +1,3 @@
 ﻿Cryptocurrency Play
 
-Payground project for Typescript.
+Playground project for TypeScript.
