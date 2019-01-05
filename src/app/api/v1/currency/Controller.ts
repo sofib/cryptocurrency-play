@@ -4,7 +4,7 @@ import {
   CryptoCurrencyTracker,
   CryptoCurrencyTrackerSource,
   CryptoCurrencyTrackerSourceFileConfig
-} from '../../../../domain/tracker/CryptoCurrencyTracker'
+} from '../../../../infrastructure/tracker/CryptoCurrencyTracker'
 
 export class CurrencyController {
   public static overview (req: restify.Request, res: restify.Response, next: restify.Next) {

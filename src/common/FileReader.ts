@@ -8,15 +8,15 @@ export class FileReader implements Reader<FileRecord> {
   private charsRemaining: string = ''
   private chunkSize = 512
 
-  constructor(fd: number) {
+  constructor (fd: number) {
     this.fd = fd
   }
 
-  read(): Promise<FileRecord[]> {
+  read (): Promise<FileRecord[]> {
     return new Promise<FileRecord[]>((resolve, reject) => {
       const buffer: Buffer = Buffer.alloc(this.chunkSize)
-      //fs.open(this.filename, 'r', (err: NodeJS.ErrnoException, fd: number): void => {
-      //})
+      // fs.open(this.filename, 'r', (err: NodeJS.ErrnoException, fd: number): void => {
+      // })
       const bytesRead: number = fs.readSync(this.fd, buffer, 0, this.chunkSize, this.bytesRead)
 
       if (bytesRead === 0) {

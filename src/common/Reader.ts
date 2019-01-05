@@ -1,3 +1,3 @@
 export interface Reader<T> {
-  read(): Promise<T[]>
+  read (): Promise<T[]>
 }

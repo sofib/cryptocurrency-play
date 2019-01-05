@@ -1,7 +1,7 @@
-import { MarketRecord } from '../market/Record'
-import { DataReceiver } from './DataReceiver'
-import { FilePersister } from '../../../infrastructure/FilePersister'
-import { FileRecord } from '../../../infrastructure/FileRecord'
+import { MarketRecord } from '../../../domain/tracker/market/Record'
+import { DataReceiver } from '../../../domain/tracker/process/DataReceiver'
+import { FilePersister } from '../../../common/FilePersister'
+import { FileRecord } from '../../../common/FileRecord'
 
 export class FileProcessorCsv implements DataReceiver {
   private _persister: FilePersister

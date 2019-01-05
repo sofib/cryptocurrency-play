@@ -1,5 +1,5 @@
 import * as commander from 'commander'
-import { CryptoCurrencyTracker, CryptoCurrencyTrackerSource } from '../../domain/tracker/CryptoCurrencyTracker'
+import { CryptoCurrencyTracker, CryptoCurrencyTrackerSource } from '../../infrastructure/tracker/CryptoCurrencyTracker'
 export class Runner {
   static exec (params: any): void {
     commander

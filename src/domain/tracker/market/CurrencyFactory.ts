@@ -4,7 +4,7 @@ import { BtcCurrency } from './currency/Btc'
 import { UsdCurrency } from './currency/Usd'
 
 export class CurrencyFactory {
-  public fromString(currencyName: string): Currency {
+  public fromString (currencyName: string): Currency {
     let currency = null
 
     if (currencyName === EurCurrency.identifier) {

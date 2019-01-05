@@ -1,8 +1,8 @@
-import { MarketRecord } from '../../market/Record'
-import { ExchangeRates as Rates } from '../../process/ExchangeRates'
+import { MarketRecord } from '../../../../domain/tracker/market/Record'
+import { ExchangeRates as Rates } from '../../../../domain/tracker/process/ExchangeRates'
 import { BlockchainRecord } from './BlockchainRecord'
-import { EurCurrency } from '../../market/currency/Eur'
-import { UsdCurrency } from '../../market/currency/Usd'
+import { EurCurrency } from '../../../../domain/tracker/market/currency/Eur'
+import { UsdCurrency } from '../../../../domain/tracker/market/currency/Usd'
 
 import * as needle from 'needle'
 
