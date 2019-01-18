@@ -1,4 +1,4 @@
-import { Reader } from './Reader'
+import { Reader } from '../resource/Reader'
 import { FileRecord } from './FileRecord'
 import * as fs from 'fs'
 

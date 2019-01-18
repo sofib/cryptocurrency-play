@@ -19,12 +19,10 @@ export class CurrencyController {
       .then((records) => {
         res.status(200)
         res.json(records)
-        // res.send()
         next()
       })
       .catch(err => {
         res.status(500)
-        // res.send()
         console.error(err)
         next()
       })

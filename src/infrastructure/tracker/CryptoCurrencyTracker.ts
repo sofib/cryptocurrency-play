@@ -1,7 +1,7 @@
 import { DataReceiver } from '../../domain/tracker/process/DataReceiver'
 import { CryptoCurrencyTracker as Tracker } from '../../domain/tracker/CryptoCurrencyTracker'
 import { FileProcessorCsv } from './process/FileProcessorCsv'
-import { FilePersister } from '../../common/FilePersister'
+import { FilePersister } from '../../common/disk/FilePersister'
 import { ExchangeRates as Flatfile } from './source/flatfiles/ExchangeRates'
 import { ExchangeRates as Blockchain } from './source/blockchain/ExchangeRates'
 

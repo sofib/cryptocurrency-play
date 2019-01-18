@@ -2,8 +2,8 @@ import { MarketRecord } from '../../../../domain/tracker/market/Record'
 import { MarketRecordBuilder } from '../MarketRecordBuilder'
 import { ExchangeRates as Rates } from '../../../../domain/tracker/process/ExchangeRates'
 import { Ticker } from '../../../../domain/tracker/process/Ticker'
-import { FileReader } from '../../../../common/FileReader'
-import { FileRecord } from '../../../../common/FileRecord'
+import { FileReader } from '../../../../common/disk/FileReader'
+import { FileRecord } from '../../../../common/disk/FileRecord'
 import * as fs from 'fs'
 
 export class ExchangeRates implements Rates, Ticker {

@@ -1,4 +1,4 @@
-import { Persister } from './Persister'
+import { Persister } from '../resource/Persister'
 import { FileRecord } from './FileRecord'
 import * as fs from 'fs'
 
