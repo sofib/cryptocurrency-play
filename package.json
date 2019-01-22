@@ -1,0 +1,36 @@
+{
+  "name": "@sofib/cryptocurrency-play",
+  "version": "0.1.0-alpha.1",
+  "description": "Playground TypeScript project",
+  "main": "index.js",
+  "author": "Sofija B. Rulani",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc --p tsconfig.json",
+    "build": "gulp",
+    "cli": "node ./lib/cli.js",
+    "api": "node ./lib/server.js",
+    "st": "standard"
+  },
+  "dependencies": {
+    "commander": "^2.15.1",
+    "fast-csv": "^2.4.1",
+    "needle": "^2.2.1",
+    "restify": "^7.2.3"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/es6-promise": "^3.3.0",
+    "@types/needle": "^2.0.2",
+    "@types/node": "^10.0.3",
+    "@types/restify": "^7.2.6",
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^4.0.2",
+    "standard": "^12.0.1",
+    "ts-node": "^6.0.2",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^3.2.2"
+  }
+}

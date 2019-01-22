@@ -1,0 +1,9 @@
+lib
+obj
+node_modules
+test.csv
+.vs
+*.sln
+*.njsproj
+.vscode
+.idea
