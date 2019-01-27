@@ -1,5 +1,10 @@
 import * as commander from 'commander'
-import { CryptoCurrencyTracker, CryptoCurrencyTrackerSource } from '../../infrastructure/tracker/CryptoCurrencyTracker'
+import { CryptoCurrencyTracker } from '../../infrastructure/tracker/CryptoCurrencyTracker'
+import { Container } from '../../common/ioc/Container'
+import { ExchangeRatesFactoryPlaceholder } from '../../domain/tracker/process/ExchangeRates'
+import { processSource } from '../../domain/tracker/Service'
+import { DataReceiverFactoryPlaceholder } from '../../domain/tracker/process/DataReceiver'
+
 export class Runner {
   static exec (params: any): void {
     commander
@@ -8,18 +13,24 @@ export class Runner {
       .parse(params)
 
     // setup btc blockchain as the default, it is the only one atm
-    const currencyFetcher = CryptoCurrencyTracker.create({
-      source: CryptoCurrencyTrackerSource.Blockchain,
-      dataReceiver: CryptoCurrencyTracker.createCsvFileReceiver('./test.csv')
-    })
+    Container.instance().bindToFactory(
+      ExchangeRatesFactoryPlaceholder,
+      CryptoCurrencyTracker.createBlockchainFetcher())
 
-    currencyFetcher.fetchRates()
-      .then(() => {
-        console.log('complete')
-      })
-      .catch((err: Error) => {
-        console.log('Failed', err)
-      })
+    Container.instance().bindToFactory(
+      DataReceiverFactoryPlaceholder,
+      CryptoCurrencyTracker.createCsvFileReceiver('./test.csv'))
+
+    processSource(
+      Container.instance().provide(ExchangeRatesFactoryPlaceholder),
+      Container.instance().provide(DataReceiverFactoryPlaceholder)
+    )
+    .then(() => {
+      console.log('complete')
+    })
+    .catch((err: Error) => {
+      console.log('Failed', err)
+    })
   }
 
 }
