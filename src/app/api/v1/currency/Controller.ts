@@ -1,20 +1,11 @@
 import * as restify from 'restify'
 
-import {
-  CryptoCurrencyTracker,
-  CryptoCurrencyTrackerSource,
-  CryptoCurrencyTrackerSourceFileConfig
-} from '../../../../infrastructure/tracker/CryptoCurrencyTracker'
+import { Container } from '../../../../common/ioc/Container'
+import { CryptoCurrencyTracker } from '../../../../domain/tracker/CryptoCurrencyTracker'
 
 export class CurrencyController {
   public static overview (req: restify.Request, res: restify.Response, next: restify.Next) {
-    const config: CryptoCurrencyTrackerSourceFileConfig = {
-      source: CryptoCurrencyTrackerSource.Flatfile,
-      sourceFilename: './test.csv',
-      dataReceiver: CryptoCurrencyTracker.createCsvFileReceiver('./test.csv'),
-    }
-
-    const currencyStats = CryptoCurrencyTracker.create(config)
+    const currencyStats = Container.instance().provide(CryptoCurrencyTracker) as CryptoCurrencyTracker
     currencyStats.getRates()
       .then((records) => {
         res.status(200)
@@ -23,8 +14,8 @@ export class CurrencyController {
       })
       .catch(err => {
         res.status(500)
-        console.error(err)
-        next()
+        console.error('err', err)
+        next(new Error('Unable to process your request'))
       })
   }
 }

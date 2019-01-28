@@ -25,6 +25,7 @@ export class ExchangeRates implements Rates, Ticker {
         const parsed = record.value.split(',')
         const builder = MarketRecordBuilder.fromSource(parsed[1])
         // todo handle null
+        console.error('parsed', parsed)
         marketRecords.push(
           builder.setSource(parsed[1])
             .setBuy(parseFloat(parsed[3]))

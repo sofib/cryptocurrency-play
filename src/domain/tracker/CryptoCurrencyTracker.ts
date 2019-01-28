@@ -14,12 +14,4 @@ export class CryptoCurrencyTracker {
   public async getRates (): Promise<MarketRecord[]> {
     return this.exchangeRates.get()
   }
-
-  public async fetchRates (): Promise<MarketRecord[]> {
-    const rates = await this.exchangeRates.get()
-    this.dataReceiver.exec(rates)
-
-    return rates
-  }
-
 }

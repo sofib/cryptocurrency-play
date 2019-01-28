@@ -1,17 +1,37 @@
+import { inspect } from 'util'
+
+let container: Container = null
+
+type Class = { new(...args: any[]): any }
 
 export class Container {
   private singletons: Map<any, any> = new Map()
   private factories: Map<any, any> = new Map()
 
-  public registerSingleton<Type, Provider> (type: Type, instance: Provider): void {
-    this.singletons.set(type, instance)
+  public static instance (): Container {
+    if (!container) {
+      container = new Container()
+    }
+
+    return container
   }
 
-  public registerProviderFactory<Type, ProviderFactory> (type: Type, factory: ProviderFactory): void {
+  public bindToFactory<T> (type: any, factory: ProviderFactory<T>): void {
+    console.error('binging for type', inspect(type))
     this.factories.set(type, factory)
   }
 
-  public provideSingleton<Type, Instance> (type: Type): Instance {
+  public provide<Type, Instance> (type: Type): Instance {
+    console.error('providing for type', inspect(type))
+    const singleton = this.provideSingle(type)
+    if (singleton) {
+      return singleton as Instance
+    }
+
+    return this.factories.get(type)()
+  }
+
+  private provideSingle<Type, Instance> (type: Type): Instance {
     const singleton = this.singletons.get(type)
     if (!singleton) {
       return null
@@ -19,13 +39,8 @@ export class Container {
 
     return singleton
   }
+}
 
-  public provide<Type, Instance> (type: Type): Instance {
-    const singleton = this.provideSingleton(type)
-    if (singleton) {
-      return singleton as Instance
-    }
-
-    return this.factories.get(type).create()
-  }
+export interface ProviderFactory<T> {
+  (): T
 }
