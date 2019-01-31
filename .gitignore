@@ -7,3 +7,5 @@ test.csv
 *.njsproj
 .vscode
 .idea
+.nyc_output
+coverage

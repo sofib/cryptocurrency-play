@@ -10,8 +10,10 @@ export class FilePersister implements Persister<FileRecord> {
   }
 
   store (records: FileRecord[]): void {
-    fs.appendFileSync(this._filename, records.map((record: FileRecord) => record.value).join('\n') + '\n')
-
-    console.log(records)
+    fs.appendFileSync(
+      this._filename,
+      records.map((record: FileRecord) => record.value)
+        .join('\n') + '\n'
+    )
   }
 }

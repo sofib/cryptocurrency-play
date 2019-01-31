@@ -10,7 +10,21 @@
     "build": "gulp",
     "cli": "node ./lib/cli.js",
     "api": "node ./lib/server.js --inspect",
+    "test": "nyc mocha",
     "st": "standard"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "sourceMap": true,
+    "instrument": true
   },
   "dependencies": {
     "commander": "^2.15.1",
@@ -24,13 +38,15 @@
     "@types/es6-promise": "^3.3.0",
     "@types/mocha": "^5.2.5",
     "@types/needle": "^2.0.2",
-    "@types/node": "^10.0.3",
+    "@types/node": "^10.12.19",
     "@types/restify": "^7.2.6",
     "chai": "^4.2.0",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-typescript": "^4.0.2",
     "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "source-map-support": "^0.5.10",
     "standard": "^12.0.1",
     "ts-node": "^8.0.2",
     "tslint": "^5.12.1",

@@ -15,24 +15,23 @@ export class FileReader implements Reader<FileRecord> {
   read (): Promise<FileRecord[]> {
     return new Promise<FileRecord[]>((resolve, reject) => {
       const buffer: Buffer = Buffer.alloc(this.chunkSize)
-      // fs.open(this.filename, 'r', (err: NodeJS.ErrnoException, fd: number): void => {
-      // })
       const bytesRead: number = fs.readSync(this.fd, buffer, 0, this.chunkSize, this.bytesRead)
 
       if (bytesRead === 0) {
-        if (this.charsRemaining !== '') {
+        if (this.charsRemaining.replace(/\u0000/g, '') !== '') {
           resolve([new FileRecord(this.charsRemaining)])
           this.charsRemaining = ''
         }
-        return resolve(null)
+        return resolve([])
       }
       const readString: string = this.charsRemaining + buffer.toString('utf8')
       this.bytesRead += bytesRead
       const readLines = readString.split('\n')
       this.charsRemaining = readLines.pop()
       const records = readLines.map(line => {
-        return new FileRecord(readString)
+        return new FileRecord(line)
       })
+
       resolve(records)
     })
   }

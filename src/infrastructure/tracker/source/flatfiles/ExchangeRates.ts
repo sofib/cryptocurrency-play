@@ -20,12 +20,12 @@ export class ExchangeRates implements Rates, Ticker {
     }
     const marketRecords: MarketRecord[] = []
     let row: FileRecord[]
-    while (row = await this.reader.read()) {
+    do {
+      row = await this.reader.read()
       row.forEach((record: FileRecord): void => {
         const parsed = record.value.split(',')
         const builder = MarketRecordBuilder.fromSource(parsed[1])
         // todo handle null
-        console.error('parsed', parsed)
         marketRecords.push(
           builder.setSource(parsed[1])
             .setBuy(parseFloat(parsed[3]))
@@ -36,7 +36,7 @@ export class ExchangeRates implements Rates, Ticker {
             .build()
         )
       })
-    }
+    } while (row.length > 0)
 
     return marketRecords
   }

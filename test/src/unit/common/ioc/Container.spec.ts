@@ -1,4 +1,4 @@
-import { Container } from '../../../../src/common/ioc/Container'
+import { Container } from '../../../../../src/common/ioc/Container'
 import { expect } from 'chai'
 import 'mocha'
 
