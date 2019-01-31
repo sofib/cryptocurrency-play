@@ -17,7 +17,7 @@ server.get('/currency', CurrencyController.overview)
 server.get('/currency/history', CurrencyController.overview)
 server.get('/currency/analytics', CurrencyController.overview)
 
-server.listen(8091, function () {
+server.listen(process.env.EXPOSED_PORT, function () {
   console.log('%s listening at %s', server.name, server.url)
 })
 
