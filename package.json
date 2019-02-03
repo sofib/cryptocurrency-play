@@ -29,8 +29,6 @@
   "dependencies": {
     "bunyan": "^1.8.12",
     "bunyan-syslog": "^0.3.2",
-    "bunyan-syslog-udp": "^0.1.0",
-    "bunyan-syslog-unixdgram": "^1.0.3",
     "commander": "^2.15.1",
     "fast-csv": "^2.4.1",
     "needle": "^2.2.1",
