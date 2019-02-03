@@ -1,7 +1,10 @@
 import {
   DataReceiver, DataReceiverFactory,
 } from '../../domain/tracker/process/DataReceiver'
-import { CryptoCurrencyTracker as Tracker } from '../../domain/tracker/CryptoCurrencyTracker'
+import {
+  CryptoCurrencyTracker as Tracker,
+  CryptoCurrencyTrackerFactory
+} from '../../domain/tracker/CryptoCurrencyTracker'
 import { FileProcessorCsv } from './process/FileProcessorCsv'
 import { FilePersister } from '../../common/disk/FilePersister'
 import { ExchangeRates as Flatfile } from './source/flatfiles/ExchangeRates'
@@ -15,10 +18,6 @@ export class CryptoCurrencyTrackerConfig {
 
 export class CryptoCurrencyTrackerSourceFileConfig extends CryptoCurrencyTrackerConfig {
   public sourceFilename: string
-}
-
-export class CryptoCurrencyTrackerReceiverFileConfig extends CryptoCurrencyTrackerConfig {
-  public receiverFilename: string
 }
 
 export enum CryptoCurrencyTrackerSource {
@@ -50,17 +49,14 @@ export class CryptoCurrencyTracker {
     return new Tracker(rate, config.dataReceiver)
   }
 
-  /**
-   * @returns Tracker
-   */
-  static createCsvReader () {
+  static createCsvReader (filename: string): CryptoCurrencyTrackerFactory {
     const config: CryptoCurrencyTrackerSourceFileConfig = {
       source: CryptoCurrencyTrackerSource.Flatfile,
-      sourceFilename: './test.csv',
-      dataReceiver: CryptoCurrencyTracker.createCsvFileReceiver('./test.csv')(),
+      sourceFilename: filename,
+      dataReceiver: CryptoCurrencyTracker.createCsvFileReceiver(filename)(),
     }
 
-    return CryptoCurrencyTracker.create(config)
+    return () => CryptoCurrencyTracker.create(config)
   }
 
   public static createCsvFileReceiver (filename: string): DataReceiverFactory {

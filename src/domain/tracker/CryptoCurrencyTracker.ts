@@ -15,3 +15,7 @@ export class CryptoCurrencyTracker {
     return this.exchangeRates.get()
   }
 }
+
+export interface CryptoCurrencyTrackerFactory {
+  (): CryptoCurrencyTracker
+}

@@ -10,7 +10,18 @@ export class CurrencyController {
     currencyStats.getRates()
       .then((records) => {
         res.status(200)
-        res.json(records)
+        res.json(records.map(record => ({
+          currency: record.observed.name,
+          buy: {
+            value: record.buy,
+            currency: record.currency.name
+          },
+          sell: {
+            value: record.sell,
+            currency: record.currency.name
+          },
+          time: new Date(record.time).toUTCString()
+        })))
         next()
       })
       .catch(err => {
