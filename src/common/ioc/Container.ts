@@ -17,12 +17,10 @@ export class Container {
   }
 
   public bindToFactory<T> (type: any, factory: ProviderFactory<T>): void {
-    console.error('binging for type', inspect(type))
     this.factories.set(type, factory)
   }
 
   public provide<Type, Instance> (type: Type): Instance {
-    console.error('providing for type', inspect(type))
     const singleton = this.provideSingle(type)
     if (singleton) {
       return singleton as Instance

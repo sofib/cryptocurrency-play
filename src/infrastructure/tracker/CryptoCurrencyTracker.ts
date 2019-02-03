@@ -41,12 +41,9 @@ export class CryptoCurrencyTracker {
     switch (config.source) {
       case CryptoCurrencyTrackerSource.Flatfile:
         const flatFileConfig = config as CryptoCurrencyTrackerSourceFileConfig
-        console.error('flat file configured', flatFileConfig.sourceFilename)
         rate = new sourceMap[config.source](flatFileConfig.sourceFilename)
         break
       default:
-        console.error('default exec')
-
         rate = new sourceMap[config.source]()
     }
 

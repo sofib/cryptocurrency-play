@@ -27,12 +27,17 @@
     "instrument": true
   },
   "dependencies": {
+    "bunyan": "^1.8.12",
+    "bunyan-syslog": "^0.3.2",
+    "bunyan-syslog-udp": "^0.1.0",
+    "bunyan-syslog-unixdgram": "^1.0.3",
     "commander": "^2.15.1",
     "fast-csv": "^2.4.1",
     "needle": "^2.2.1",
     "restify": "^7.2.3"
   },
   "devDependencies": {
+    "@types/bunyan": "^1.8.5",
     "@types/chai": "^4.1.7",
     "@types/commander": "^2.12.2",
     "@types/es6-promise": "^3.3.0",

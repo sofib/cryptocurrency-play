@@ -4,6 +4,8 @@ import { Container } from '../../../common/ioc/Container'
 import { CryptoCurrencyTracker as Tracker } from '../../../domain/tracker/CryptoCurrencyTracker'
 import { ExchangeRatesFactoryPlaceholder } from '../../../domain/tracker/process/ExchangeRates'
 import { CryptoCurrencyTracker } from '../../../infrastructure/tracker/CryptoCurrencyTracker'
+import * as bunyan from 'bunyan'
+import { loggerFactory } from '../../../infrastructure/ioc/factories/Logger'
 
 const server = restify.createServer({
   name: 'Crypto currency API',
@@ -12,18 +14,21 @@ const server = restify.createServer({
 
 Container.instance().bindToFactory(Tracker, CryptoCurrencyTracker.createCsvReader)
 Container.instance().bindToFactory(ExchangeRatesFactoryPlaceholder, CryptoCurrencyTracker.createFlatfileFetcher('./test.csv'))
+Container.instance().bindToFactory(bunyan, loggerFactory)
 
 server.get('/currency', CurrencyController.overview)
 server.get('/currency/history', CurrencyController.overview)
 server.get('/currency/analytics', CurrencyController.overview)
 
+const logger = Container.instance().provide(bunyan) as bunyan
+
 server.listen(process.env.EXPOSED_PORT, function () {
-  console.log('%s listening at %s', server.name, server.url)
+  logger.info(`${server.name} listening at ${server.url}`)
 })
 
 const shutdown = () => {
   server.close(function () {
-    console.log('server shut down')
+    logger.info('server shut down')
   })
 }
 
@@ -32,10 +37,10 @@ process.on('SIGTERM', shutdown)
 process.on('SIGINT', shutdown)
 
 process.on('uncaughtException', function (err: Error) {
-  console.error('error out of control', err)
+  logger.error(err, 'error out of control')
   shutdown()
 })
 
 process.on('unhandledRejection', function (reason, p) {
-  console.error('Unhandled Rejection at:', p, 'reason:', reason)
+  logger.error({ rejectionAt: p, reason }, 'Unhandled rejection')
 })
