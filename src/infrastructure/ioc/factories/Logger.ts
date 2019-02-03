@@ -2,19 +2,18 @@ import * as SyslogStream from 'bunyan-syslog'
 import * as Logger from 'bunyan'
 
 export function loggerFactory (): Logger {
-  const stream = SyslogStream.createBunyanStream({
-    type: 'sys',
-    facility: SyslogStream.local0,
-    host: 'syslog',
-    port: 514
-  })
-  const logger = Logger.createLogger({
-    name: 'PerfectOne',
+  return Logger.createLogger({
+    name: 'DummyLogger',
     streams: [
       {
         level: 'debug',
         type: 'raw',
-        stream
+        stream: SyslogStream.createBunyanStream({
+          type: 'sys',
+          facility: SyslogStream.local0,
+          host: 'syslog',
+          port: 514
+        })
       },
       {
         level: 'debug',
@@ -22,6 +21,4 @@ export function loggerFactory (): Logger {
       }
     ]
   })
-  logger.warn('where am I going?')
-  return logger
 }

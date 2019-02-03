@@ -2,14 +2,8 @@ version: "3"
 services:
   syslog:
     image: jumanjiman/rsyslog
-    expose:
-      - 514
-      - 514/udp
-    ports:
-      - 514:514
-      - 514:514/udp
-    volumes:
-      - syslog:/var/run/rsyslog/dev
+    networks: 
+      - cc-net
   api:
     build:
       context: .
@@ -29,13 +23,7 @@ services:
       - cc-net
     links:
       - syslog
-    environment:
-      - DOCKER_TLS_VERIFY
-      - DOCKER_HOST
-      - DOCKER_CERT_PATH
     depends_on:
       - syslog
 networks:
   cc-net:
-volumes:
-  syslog:
