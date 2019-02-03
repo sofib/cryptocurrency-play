@@ -2,6 +2,7 @@ import * as restify from 'restify'
 
 import { Container } from '../../../../common/ioc/Container'
 import { CryptoCurrencyTracker } from '../../../../domain/tracker/CryptoCurrencyTracker'
+import Logger = require('bunyan')
 
 export class CurrencyController {
   public static overview (req: restify.Request, res: restify.Response, next: restify.Next) {
@@ -14,7 +15,8 @@ export class CurrencyController {
       })
       .catch(err => {
         res.status(500)
-        console.error('err', err)
+        const logger = Container.instance().provide(Logger) as Logger
+        logger.error('err', err)
         next(new Error('Unable to process your request'))
       })
   }

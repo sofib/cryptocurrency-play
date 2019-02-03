@@ -1,0 +1,29 @@
+version: "3"
+services:
+  syslog:
+    image: jumanjiman/rsyslog
+    networks: 
+      - cc-net
+  api:
+    build:
+      context: .
+      args:
+        - EXPOSED_PORT=${EXPOSED_PORT_SERVICE}
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - ${EXPOSED_PORT_CONTAINER}:${EXPOSED_PORT_SERVICE}
+    networks:
+      - cc-net
+    links:
+      - syslog
+    depends_on:
+      - syslog
+networks:
+  cc-net:
