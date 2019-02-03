@@ -2,7 +2,6 @@ import * as restify from 'restify'
 import { CurrencyController } from './currency/Controller'
 import { Container } from '../../../common/ioc/Container'
 import { CryptoCurrencyTracker as Tracker } from '../../../domain/tracker/CryptoCurrencyTracker'
-import { ExchangeRatesFactoryPlaceholder } from '../../../domain/tracker/process/ExchangeRates'
 import { CryptoCurrencyTracker } from '../../../infrastructure/tracker/CryptoCurrencyTracker'
 import * as bunyan from 'bunyan'
 import { loggerFactory } from '../../../infrastructure/ioc/factories/Logger'
@@ -12,8 +11,7 @@ const server = restify.createServer({
   version: '1.0.0'
 })
 
-Container.instance().bindToFactory(Tracker, CryptoCurrencyTracker.createCsvReader)
-Container.instance().bindToFactory(ExchangeRatesFactoryPlaceholder, CryptoCurrencyTracker.createFlatfileFetcher('./test.csv'))
+Container.instance().bindToFactory(Tracker, CryptoCurrencyTracker.createCsvReader('./test.csv'))
 Container.instance().bindToFactory(bunyan, loggerFactory)
 
 server.get('/currency', CurrencyController.overview)
