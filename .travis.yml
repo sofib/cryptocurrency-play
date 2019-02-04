@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "10"
+matrix:
+  fast_finish: true
+  install:
+    - yarn install
+  script:
+    - yarn test
+    - if [[ "$SONAR_LOGIN" ]]; then yarn run sonar -- -D"sonar.login=${SONAR_LOGIN}"; fi
