@@ -1,0 +1,19 @@
+dist: trusty
+node_js:
+  - "10"
+jdk: 
+  - oraclejdk8
+
+addons:
+  sonarcloud:
+    organization: "sofib-github"
+    token:
+      secure: "XVbBL05tVLpNZywKbMCIxBmghEPTOyDhd0yCa/h4qwCwPsHPr7t4kOR0WBAdDoPYVpELsNJWank3j7ZCbuESre8Ka+CQeMWUTLFlcX0s6vjX4c61bDSk5Gfio+KJQXubw2NY+U3tjbi9FCwRouBzsME2Hl5rlYiriwZz5tHX1n7SOdXXulONIb4SJplMBUBDYAAxO+lcw10jdkV7I5aZy1MYKvm1mWNct7FR0Oa+1pT8ISqZ+KWBuWojKB9SgIWAYGltHKwzXXi9JfwGtF22Qh15aPkrZbKyjbApULhu5UgP5U98iKtLUGTCBVo3NNyaL2Fvn2Y5dtkrEmQ/50Fpa+5FeL1U7tO9zawlHUTmnor1l0Q1BaZNsxkgKXzH6lvc5xED7P0h5Y8E4OwpUlPexSYPm3xE9sMWT6Th0TCOtIxu1kqp7h9NdmIAO/V5c2C28+np3qu6iPNjPEOJoZWYMvvBn1RbB0LyosoqVFkcqJ+7fmYblshqrd4ZMx48L6SUjDa7f8qWghJ1nRFRyUGxx8095kUMhClbGVpJxJguWBJUvH8YgOnC9+lSMtnqp/0GJZjNMjcs5E878fkfFCs0TYj+wQ43uzsM23c4726OBqcFDQ9+MhdikVEZc+I32llx1w1x/qrFsgZeioAPO9wJMFgscFFUZLZJPXUK8KfHQ9w="
+
+matrix:
+  fast_finish: true
+  install:
+    yarn install
+  script:
+    yarn test
+    sonnar-scanner
