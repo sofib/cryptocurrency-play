@@ -11,6 +11,7 @@
     "cli": "node ./lib/cli.js",
     "api": "node ./lib/server.js --inspect",
     "test": "nyc mocha",
+    "sonar": "sonar-scanner",
     "st": "standard"
   },
   "nyc": {
@@ -49,6 +50,7 @@
     "gulp-typescript": "^4.0.2",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
+    "sonar-scanner": "^3.1.0",
     "source-map-support": "^0.5.10",
     "standard": "^12.0.1",
     "ts-node": "^8.0.2",
